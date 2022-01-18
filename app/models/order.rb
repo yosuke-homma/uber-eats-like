@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   def save_with_update_line_foods!(line_foods)
     ActiveRecord::Base.transaction do
       line_foods.each do |line_foods|
-        line_foods.update_attributes!(active: false, order: self)
+        line_foods.update!(active: false, order: self)
       end
       self.save!
     end
