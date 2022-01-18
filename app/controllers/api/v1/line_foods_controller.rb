@@ -1,7 +1,7 @@
 module Api
   module V1
     class LineFoodsController < ApplicationController
-      before_acion :set_food, only: %i[create]
+      before_acion :set_food, only: %i[create replace]
 
       def index
         line_foods = LineFoods.active
@@ -33,6 +33,22 @@ module Api
           }, status :created
         else
           render json: {}, status: :internal_server_error
+        end
+      end
+
+      def replace
+        LineFood.active.other_restaurant(@ordered_food.restaurant.id).each do |line_food|
+          line_food.update_attribute(:active, false)
+        end
+
+        set_line_food(@ordered_food)
+
+        if @line_food.save
+          render json: {
+            line_food: @line_food
+          }, status: :created
+        else
+          render json: {}, status: :internal_server_:error
         end
       end
 
