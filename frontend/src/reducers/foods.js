@@ -1,4 +1,4 @@
-import { REQUEST_STATE } from "../constants";
+import { REQUEST_STATE } from '../constants';
 
 export const initialState = {
   fetchState: REQUEST_STATE.INITIAL,
@@ -7,7 +7,7 @@ export const initialState = {
 
 export const foodsActionTypes = {
   FETCHING: 'FETCHING',
-  FETCHING_SUCCESS: 'FETCH_SUCCESS'
+  FETCH_SUCCESS: 'FETCH_SUCCESS'
 }
 
 export const foodsReducer = (state, action) => {
@@ -17,7 +17,7 @@ export const foodsReducer = (state, action) => {
         ...state,
         fetchState: REQUEST_STATE.LOADING,
       };
-    case foodsActionTypes.FETCHING_SUCCESS:
+    case foodsActionTypes.FETCH_SUCCESS:
       return {
         fetchState: REQUEST_STATE.OK,
         foodsList: action.payload.foods,
